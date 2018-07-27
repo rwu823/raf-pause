@@ -9,7 +9,7 @@
     <img src="https://circleci.com/gh/rwu823/raf-pause.svg" />
   </a>
   <a href="https://codecov.io/gh/rwu823/raf-pause" alt="Coverage">
-    <img src="https://img.shields.io/codecov/c/github/rwu823/raf-pause/BRANCH.svg?style=flat-square&" />
+    <img src="https://img.shields.io/codecov/c/github/rwu823/raf-pause/master.svg?style=flat-square&" />
   </a>
   <img src="https://img.shields.io/github/license/rwu823/raf-pause.svg?style=flat-square&" />
 </p>
