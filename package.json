@@ -1,0 +1,54 @@
+{
+  "name": "raf-pause",
+  "version": "0.0.1",
+  "description": "set timeout in requestAnimationFrame",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "tslint -p .",
+    "build": "rm -rf out && tsc && cp package.json README.md out/"
+  },
+  "keywords": [
+    "raf",
+    "requestAnimationRequest",
+    "timeout",
+    "pause",
+    "timer"
+  ],
+  "author": "Rocky Wu <rwu823@gmail.com>",
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,css}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ]
+  },
+  "devDependencies": {
+    "@rwu823/base": "github:rwu823/base",
+    "@types/jest": "^23.3.1",
+    "jest": "^23.4.1",
+    "ts-jest": "^23.0.1"
+  }
+}
