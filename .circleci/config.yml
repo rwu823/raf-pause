@@ -17,6 +17,16 @@ vars:
     restore_cache:
       key: node_modules#{{ checksum "package-lock.json" }}
 
+  save_build:  &save_build
+    save_cache:
+      key: out#{{ .Revision }}
+      paths:
+        - out
+
+  restore_build:  &restore_build
+    restore_cache:
+      key: out#{{ .Revision }}
+
   branch_not_deploy: &branch_not_deploy
     filters:
       branches:
@@ -88,6 +98,7 @@ jobs:
       - run: npm i
       - *save_node_modules
       - run: npm run build
+      - *save_build
 
   npm publish:
     <<: *init
@@ -96,7 +107,7 @@ jobs:
       - *restore_node_modules
       - run: npm i
       - *save_node_modules
-      - run: npm run build
+      - *restore_build
       - *setup_npm
       - run: npm publish out
 
@@ -121,7 +132,17 @@ workflows:
           <<: *branch_not_deploy
   Deploying:
     jobs:
+      - test:
+          <<: *branch_is_deploy
+      - build:
+          <<: *branch_is_deploy
       - github tags:
           <<: *branch_is_deploy
+          requires:
+              - test
+              - build
       - npm publish:
           <<: *branch_is_deploy
+          requires:
+              - test
+              - build
