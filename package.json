@@ -1,6 +1,6 @@
 {
   "name": "raf-pause",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "set timeout in requestAnimationFrame",
   "main": "src/index.js",
   "scripts": {
