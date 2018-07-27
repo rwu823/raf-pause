@@ -27,6 +27,14 @@ or
 $ yard add raf-pause
 ```
 
+## API
+
+### start()
+Start the timer.
+
+### clean()
+Clean the timer.
+
 ## Recipes
 
 ```js
@@ -38,7 +46,7 @@ const run = rafPause(() => {
 run.start()
 
 
-const runAndLoop = rafPause((V) => {
+const runAndLoop = rafPause(() => {
   // do something in loop
   runAndLoop.start()
 }, 500)
@@ -66,3 +74,6 @@ countDown = rafPause(() => {
 }, 1000)
 
 ```
+
+## Fallback
+It'll fallback to `setTimeout` if browsers don't support `requestAnimationFrame`
