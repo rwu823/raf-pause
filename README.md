@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="./logo.png" />
+  <img src="./logo.png" width="300" />
 </h1>
 <p align="center">
   <a href="https://www.npmjs.com/package/raf-pause">
