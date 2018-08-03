@@ -3,19 +3,26 @@ const caf = window.cancelAnimationFrame || window.clearTimeout
 
 interface RafPause {
   clean(): void;
-  start(): void;
+  start(callback?: Function): void;
+  loop(): void;
 }
 
 const rafPause = (func: Function, timeout = 0) => {
   let timer = 0
 
   const main: RafPause = {
-    start: () => {
+    start: (cb) => {
       const start = new Date().getTime()
 
       const run = () => {
-        if (new Date().getTime() - start >= timeout) {
-          timer = raf(() => func())
+        if (Date.now() - start >= timeout) {
+          timer = raf(async () => {
+            await func()
+
+            if (typeof cb === 'function') {
+              cb()
+            }
+          })
         } else {
           timer = raf(run)
         }
@@ -27,9 +34,13 @@ const rafPause = (func: Function, timeout = 0) => {
     clean: () => {
       caf(timer)
     },
+
+    loop() {
+      this.start(() => this.loop())
+    },
   }
 
   return main
 }
 
-export default rafPause
+export = rafPause

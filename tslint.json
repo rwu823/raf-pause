@@ -1,5 +1,9 @@
 {
   "extends": [
     "@rwu823/base/tslint"
-  ]
+  ],
+  "rules": {
+    "jsx-no-multiline-js": false,
+    "prefer-array-literal": false
+  }
 }

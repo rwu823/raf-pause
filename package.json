@@ -6,7 +6,11 @@
   "scripts": {
     "test": "jest --coverage",
     "lint": "tslint -p .",
-    "build": "rm -rf out && tsc && cp package.json README.md out/"
+    "dev": "npm run build-dll && webpack-dev-server --hot",
+    "cc": "rm -rf gh-pages out",
+    "build-dll": "[ ! -f out/assets/libs.dll.json ] && webpack --config webpack.dll.ts || exit 0",
+    "build-web": "npm run cc && webpack --config webpack.dll.ts && NODE_ENV=production webpack --progress",
+    "build": "npm run cc && tsc && cp package.json README.md out/"
   },
   "keywords": [
     "raf",
@@ -23,12 +27,13 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,css}": [
-      "prettier --write",
+    "*.{ts,tsx}": [
+      "prettier --write --parser typescript",
       "git add"
     ]
   },
   "jest": {
+    "testURL": "http://localhost/",
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
@@ -47,8 +52,28 @@
   },
   "devDependencies": {
     "@rwu823/base": "github:rwu823/base",
+    "@types/hard-source-webpack-plugin": "^0.9.0",
+    "@types/html-webpack-plugin": "^3.2.0",
     "@types/jest": "^23.3.1",
-    "jest": "^23.4.1",
-    "ts-jest": "^23.0.1"
-  }
+    "@types/node": "^10.5.6",
+    "@types/react": "^16.4.7",
+    "@types/react-dom": "^16.0.6",
+    "@types/react-hot-loader": "^4.1.0",
+    "@types/webpack": "^4.4.9",
+    "@types/webpack-dev-server": "^2.9.5",
+    "awesome-typescript-loader": "^5.2.0",
+    "hard-source-webpack-plugin": "^0.12.0",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.4.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-hot-loader": "^4.3.4",
+    "styled-components": "^3.4.1",
+    "ts-jest": "^23.1.2",
+    "typescript": "^3.0.1",
+    "webpack": "^4.16.4",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "dependencies": {}
 }

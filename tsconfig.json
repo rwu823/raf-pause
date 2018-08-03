@@ -4,22 +4,29 @@
     "out/**/*",
     "**/*.spec.ts",
     "**/*.test.ts",
+    // "benchmark"
   ],
+
   "compilerOptions": {
     /* =Module Resolution Options */
-    // "baseUrl": ".",
-    // "paths": {
-
-    // },
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "*": [
+        "types/*"
+      ]
+    },
 
     /* =Basic Options */
-    "target": "es5",
+    "downlevelIteration": true,
+    "target": "es6",
     "lib": [
       "es2015",
       "es2016",
       "esnext",
       "dom",
     ],
+
     // "allowJs": true,
     // "checkJs": true,
     "removeComments": true,
@@ -27,12 +34,13 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "declaration": true,
-    "outDir": "out/src",
+    "outDir": "out",
     "module": "commonjs",
+    "moduleResolution": "node",
     "newLine": "lf",
     "typeRoots": [
+      "./types",
       "node_modules/@types",
-      "./types"
     ],
 
     /* =Strict Type-Checking Options */

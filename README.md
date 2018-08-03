@@ -32,6 +32,9 @@ $ yard add raf-pause
 ### start()
 Start the timer.
 
+### loop()
+Loop the timer.
+
 ### clean()
 Clean the timer.
 
