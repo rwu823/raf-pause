@@ -1,10 +1,10 @@
 const raf = window.requestAnimationFrame || window.setTimeout
 const caf = window.cancelAnimationFrame || window.clearTimeout
 
-interface RafPause {
-  clean(): void;
-  start(callback?: Function): void;
-  loop(): void;
+export interface RafPause {
+  clean(): void
+  start(callback?: Function): void
+  loop(): void
 }
 
 const rafPause = (func: Function, timeout = 0) => {
@@ -43,4 +43,5 @@ const rafPause = (func: Function, timeout = 0) => {
   return main
 }
 
-export = rafPause
+export default rafPause
+exports = rafPause
