@@ -5,7 +5,7 @@ import HardSourcePlugin from 'hard-source-webpack-plugin'
 const library = '__[name]_[hash]'
 
 interface Conf extends Configuration {
-  mode: any;
+  mode: any
 }
 
 const conf: Conf = {
