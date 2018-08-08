@@ -4,12 +4,11 @@ import HardSourcePlugin from 'hard-source-webpack-plugin'
 
 const library = '__[name]_[hash]'
 
-interface Conf extends Configuration {
-  mode: any
-}
+const mode =
+  process.env.NODE_ENV === 'production' ? 'production' : 'development'
 
-const conf: Conf = {
-  mode: process.env.NODE_ENV || 'development',
+const conf: Configuration = {
+  mode,
   entry: {
     libs: ['react', 'react-dom', 'styled-components'],
   },

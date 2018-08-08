@@ -6,18 +6,20 @@ import HTMLPlugin from 'html-webpack-plugin'
 
 interface DevServer extends WebpackDevConf {
   port: any
-  stats: any
+  // stats: any
 }
 
 interface Conf extends Configuration {
-  mode: any
-  entry: any
+  // mode: any
+  entry: {
+    [key: string]: string[]
+  }
+
   devServer: DevServer
-  optimization: any
 }
 
 const port = process.env.PORT || 8081
-const env = process.env.NODE_ENV || 'development'
+const env = process.env.NODE_ENV === 'production' ? 'production' : 'development'
 const isDev = env === 'development'
 
 const config: Conf = {
@@ -26,16 +28,17 @@ const config: Conf = {
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
-    stats: {
-      modules: false,
-      error: true,
-      warning: true,
-    },
     contentBase: 'gh-pages/',
     overlay: {
       warnings: false,
       errors: true,
     },
+  },
+
+  stats: {
+    modules: false,
+    errors: true,
+    warnings: true,
   },
 
   mode: env,
@@ -86,7 +89,6 @@ const config: Conf = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        default: false,
         shared: {
           chunks: 'all',
           test: /(client\/components|src\/share)/,
